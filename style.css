@@ -1,130 +1,142 @@
 :root {
-    /* Nueva paleta de azules */
-    --blue-dark: #1565c0;    /* Azul oscuro para textos */
-    --blue-medium: #42a5f5;  /* Azul vibrante para sobres */
-    --blue-accent: #64b5f6;  /* Otro tono para variar sobres */
-    --blue-light: #e3f2fd;   /* Azul cielo muy clarito para fondo */
+    --blue-dark: #1565c0;
+    --blue-medium: #42a5f5;
+    --blue-light: #e3f2fd;
     --white: #ffffff;
-    --gold: #ffd700;         /* Un toque dorado para contraste */
+    --gold: #ffd700;
 }
 
 body {
-    /* Fondo tierno: un degradado suave como el cielo */
+    /* Fondo radial tierno azulado */
     background: radial-gradient(circle at center, var(--white) 0%, var(--blue-light) 100%);
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 20px;
-    min-height: 100vh; /* Asegura que ocupe toda la pantalla */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
 }
 
-.container { text-align: center; max-width: 900px; width: 100%; }
+.container { 
+    max-width: 1100px; 
+    margin: 0 auto;
+    text-align: center; 
+}
 
-h1 { color: var(--blue-dark); font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
-.instruction { color: #666; font-size: 1.1rem;}
+h1 { 
+    color: var(--blue-dark); 
+    font-family: 'Dancing Script', cursive; 
+    font-size: 3.5rem; 
+    margin-bottom: 5px; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
 
+.subtitle { color: #666; font-size: 1.1rem; margin-bottom: 30px; }
+
+/* --- GRID SYSTEM --- */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    padding: 40px 20px;
+    /* Columnas automáticas y responsivas */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 25px;
+    padding: 10px;
 }
 
-/* El Sobre Azul */
+/* --- EL SOBRE --- */
 .envelope-wrapper {
-    position: relative;
-    height: 200px;
     cursor: pointer;
-    transition: transform 0.3s ease;
     perspective: 1000px;
+    transition: transform 0.3s;
 }
-
-.envelope-wrapper:hover { transform: translateY(-15px) rotate(2deg); }
+.envelope-wrapper:hover { transform: scale(1.05) rotate(1deg); }
 
 .envelope {
     background: var(--blue-medium);
-    height: 100%;
-    border-radius: 15px;
+    border-radius: 12px;
+    padding: 20px 10px;
+    color: white;
+    box-shadow: 0 5px 15px rgba(66, 165, 245, 0.3);
+    min-height: 130px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: white;
-    box-shadow: 0 10px 25px rgba(21, 101, 192, 0.3); /* Sombra azulada */
-    border: 3px solid var(--white);
-    position: relative;
-    overflow: hidden;
+    border: 3px solid white;
 }
 
-/* El sello del corazón (ahora blanco para resaltar en el azul) */
-.heart-seal {
-    width: 30px;
-    height: 30px;
-    background: var(--white);
-    transform: rotate(45deg);
-    margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.heart-seal:before, .heart-seal:after {
-    content: "";
-    width: 30px; height: 30px;
-    background: var(--white);
-    border-radius: 50%;
-    position: absolute;
-}
-.heart-seal:before { top: -15px; left: 0; }
-.heart-seal:after { top: 0; left: -15px; }
+.envelope.special { background: var(--blue-dark); }
 
+.seal { font-size: 2.2rem; margin-bottom: 8px; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.label { font-size: 0.95rem; line-height: 1.3; font-weight: 300; }
+.label b { font-weight: 600; display: block; margin-top: 4px; }
 
-/* La Carta */
+/* --- LA CARTA MODAL --- */
 .letter-content {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+    transform: translate(-50%, -50%) scale(0);
+    
+    /* Responsive y Scroll */
     width: 85%;
     max-width: 450px;
-    background: var(--white);
-    padding: 50px;
+    max-height: 85vh;
+    overflow-y: auto; /* Scroll si el contenido es largo */
+    
+    background: white;
+    padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    box-shadow: 0 0 100px rgba(0,0,0,0.2);
     z-index: 1000;
     opacity: 0;
-    pointer-events: none; /* Importante para que no moleste cuando está cerrada */
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efecto rebote al abrir */
-    border: 2px solid var(--blue-light);
-    text-align: left;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 4px solid var(--blue-light);
 }
 
+/* Estado abierto */
 .envelope-wrapper.open .letter-content {
-    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    transform: translate(-50%, -50%) scale(1);
     opacity: 1;
     pointer-events: auto;
 }
 
 .letter-content h3 { 
-    font-family: 'Dancing Script', cursive; 
     color: var(--blue-dark); 
-    font-size: 2.2rem;
-    margin-top: 0;
+    font-family: 'Dancing Script', cursive; 
+    font-size: 2.2rem; 
+    margin: 0 0 15px 0;
 }
 
-.letter-content p { color: #555; line-height: 1.8; font-size: 1.1rem;}
+.letter-content p { 
+    color: #555; 
+    font-size: 1rem; 
+    line-height: 1.6; 
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-button {
+/* Estilo para las fotos dentro de cartas */
+.letter-img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Botón de cerrar */
+.close-btn {
     background: var(--blue-medium);
     color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 30px;
-    margin-top: 25px;
+    padding: 10px 30px;
+    border-radius: 50px;
     cursor: pointer;
     font-weight: 500;
-    transition: background 0.3s;
-    display: block;
-    margin-left: auto;
-    box-shadow: 0 5px 15px rgba(66, 165, 245, 0.4);
+    box-shadow: 0 4px 10px rgba(66, 165, 245, 0.4);
+    transition: background 0.2s;
 }
-button:hover { background: var(--blue-dark); }
+.close-btn:hover { background: var(--blue-dark); }
