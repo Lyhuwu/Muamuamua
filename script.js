@@ -1,18 +1,21 @@
-const timeline = gsap.timeline({ duration: 0.3 });
+function openLetter(event, element) {
+    // 1. Abrir la carta visualmente
+    element.classList.add('open');
 
-timeline.fromTo('.cake-topping', { yPercent: -300, opacity: 0.5 }, { yPercent: 0, opacity: 1 });
-timeline.to('.candle-container', { opacity: 1 });
-timeline.to('.flame-wrap', { scale: 1, ease: "back.out" });
-timeline.to('.greeting', { scale: 1, ease: "back.out" });
-timeline.to('.star', {
-  opacity: 0.5,
-  stagger: 0.05,
-  onComplete: function () {
-    gsap.to('.star', { scale: 0.25, repeat: -1, stagger: 0.1, yoyo: true, yoyoEase: "power1.out" });
-  }
-});
+    // 2. ¡Lanzar los confetis de corazón! ✨
+    // Usamos la librería 'confetti' que cargamos en el HTML
+    confetti({
+        particleCount: 150,    // Cantidad de confeti
+        spread: 100,           // Qué tanto se expande
+        origin: { y: 0.6 },    // Desde dónde sale (un poco más abajo del centro)
+        colors: ['#42a5f5', '#1565c0', '#ffffff', '#FFD700'], // Azules, blanco y dorado
+        shapes: ['heart'],     // ¡La clave! Forma de corazón
+        scalar: 1.2            // Un poquito más grandes los corazones
+    });
+}
 
-// Detectar toque o click para apagar/prender las velas
-document.addEventListener('click', () => {
-  document.querySelectorAll('.flame-wrap').forEach(flame => flame.classList.toggle('off'));
-});
+function closeLetter(event, btn) {
+    event.stopPropagation();
+    const wrapper = btn.closest('.envelope-wrapper');
+    wrapper.classList.remove('open');
+}
