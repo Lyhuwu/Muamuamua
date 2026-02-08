@@ -12,47 +12,146 @@
 
     <div class="container">
         <h1>Cartas para Sofi ✨</h1>
-        <p class="instruction">Haz clic en un sobre para descubrir el mensaje</p>
-
+        <p class="subtitle">Haz clic en un sobre para abrirlo</p>
+        
         <div class="gallery">
+            
             <div class="envelope-wrapper" onclick="openLetter(event, this)">
                 <div class="envelope">
-                    <div class="heart-seal"></div>
-                    <div class="label">Abre cuando... <br><b>estés triste</b> ☁️</div>
+                    <div class="seal">☁️</div>
+                    <div class="label">Abre cuando...<br><b>estés pasando un mal día</b></div>
                 </div>
                 <div class="letter-content">
                     <h3>Para los días grises 💙</h3>
-                    <p>Mi amor, recuerda que incluso las nubes más oscuras no pueden ocultar el sol para siempre. Estoy aquí para ser tu paraguas. Te amo infinito.</p>
-                    <button onclick="closeLetter(event, this)">Guardar carta</button>
+                    <p>Recuerda que ninguna lluvia es eterna. Estoy aquí para ser tu paraguas y escucharte siempre.</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Guardar carta</div>
                 </div>
             </div>
 
             <div class="envelope-wrapper" onclick="openLetter(event, this)">
-                <div class="envelope" style="background: var(--blue-accent);"> <div class="heart-seal"></div>
-                    <div class="label">Abre cuando... <br><b>me extrañes</b> 🌙</div>
+                <div class="envelope">
+                    <div class="seal">🎮</div>
+                    <div class="label">Abre cuando...<br><b>yo haya sido más pro que tú (gg izi)</b></div>
                 </div>
                 <div class="letter-content">
-                    <h3>Cierra los ojitos...</h3>
-                    <p>¿Los cerraste? Bien. Ahora siente este abrazo fuerte que te mando a la distancia. No importa qué tan lejos estemos, mi corazón siempre está al ladito del tuyo.</p>
-                    <button onclick="closeLetter(event, this)">Guardar carta</button>
+                    <h3>GG IZI NO RE 🕶️</h3>
+                    <p>Admito que tuviste mala suerte... ¡mentira! Esta vez fui yo la MVP. Pero tranquila, en la próxima te carrio.</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Aceptar derrota</div>
                 </div>
             </div>
-            
-             <div class="envelope-wrapper" onclick="openLetter(event, this)">
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
                 <div class="envelope">
-                    <div class="heart-seal"></div>
-                    <div class="label">Abre cuando... <br><b>necesites un "Te Amo"</b> 💙</div>
+                    <div class="seal">🏳️</div>
+                    <div class="label">Abre cuando...<br><b>tengamos un desacuerdo</b></div>
                 </div>
                 <div class="letter-content">
-                    <h3>¡TE AMO!</h3>
-                    <p>Solo quería recordártelo. Eres la persona más especial de mi universo. Gracias por existir, Sofi.</p>
-                    <button onclick="closeLetter(event, this)">Guardar carta</button>
+                    <h3>Pausa ⏸️</h3>
+                    <p>Respira. No importa quién tenga la razón, lo que importa somos nosotras. Te amo más que a ganar una discusión.</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Hacer las paces</div>
+                </div>
+            </div>
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope">
+                    <div class="seal">💌</div>
+                    <div class="label">Abre cuando...<br><b>necesites saber que te amo</b></div>
+                </div>
+                <div class="letter-content">
+                    <h3>Te amo infinito</h3>
+                    <p>Eres mi pensamiento favorito al despertar y antes de dormir. Nunca lo dudes.</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Yo también</div>
+                </div>
+            </div>
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope">
+                    <div class="seal">💆‍♀️</div>
+                    <div class="label">Abre cuando...<br><b>te sientas estresada</b></div>
+                </div>
+                <div class="letter-content">
+                    <h3>Respira hondo...</h3>
+                    <p>Inhala... Exhala... Todo va a estar bien. Eres capaz de todo, pero date un respiro.</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Relajarse</div>
+                </div>
+            </div>
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope special">
+                    <div class="seal">📏</div>
+                    <div class="label">¿Quieres saber<br><b>cuánto te amo?</b></div>
+                </div>
+                <div class="letter-content">
+                    <h3>El resultado es...</h3>
+                    <p>¡Ups! El número es demasiado grande para caber en esta pantalla. Es infinito. 🚀💙</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Me encanta</div>
+                </div>
+            </div>
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope">
+                    <div class="seal">🥂</div>
+                    <div class="label">Abre cuando...<br><b>quieras recordar nuestra primer cita</b></div>
+                </div>
+                <div class="letter-content">
+                    <h3>Aquel día mágico ✨</h3>
+                    <img src="fotos/primera-cita.jpg" alt="Nuestra cita" class="letter-img">
+                    <p>Todavía recuerdo lo nerviosa que estaba y lo hermosa que te veías...</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Que bonito recuerdo</div>
+                </div>
+            </div>
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope">
+                    <div class="seal">🫂</div>
+                    <div class="label">Abre cuando...<br><b>te sientas sola</b></div>
+                </div>
+                <div class="letter-content">
+                    <h3>Aquí estoy</h3>
+                    <p>Cierra los ojos y siente este abrazo. Aunque no esté ahí físicamente, mi corazón no se separa del tuyo.</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Sentir abrazo</div>
+                </div>
+            </div>
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope">
+                    <div class="seal">🔥</div>
+                    <div class="label">Abre cuando...<br><b>pierdas la motivación</b></div>
+                </div>
+                <div class="letter-content">
+                    <h3>¡Tú puedes!</h3>
+                    <p>Mira todo lo que has logrado. Eres brillante, fuerte y vas a conseguir tus sueños.</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Vamos con todo</div>
+                </div>
+            </div>
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope special">
+                    <div class="seal">💘</div>
+                    <div class="label">¿Por qué<br><b>me enamoré de ti?</b></div>
+                </div>
+                <div class="letter-content">
+                    <h3>La lista es larga...</h3>
+                    <p>Por tu forma de ver la vida, tu risa, tu inteligencia y por como me haces sentir la persona más afortunada.</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Te amo</div>
+                </div>
+            </div>
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope">
+                    <div class="seal">📸</div>
+                    <div class="label">¿Qué foto<br><b>me encanta de ti?</b></div>
+                </div>
+                <div class="letter-content">
+                    <h3>Simplemente arte 😍</h3>
+                    <img src="fotos/tu-foto.jpg" alt="Foto favorita" class="letter-img">
+                    <p>Amo esta foto porque captura exactamente lo hermosa que eres por dentro y por fuera.</p>
+                    <div class="close-btn" onclick="closeLetter(event, this)">Guardar en el corazón</div>
                 </div>
             </div>
 
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
