@@ -2,50 +2,57 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sofi | Nuestra Galaxia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Sofi 💙</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="intro-overlay">
-        <div class="scroll-design">
-            <h2 class="typewriter">Dicen que el universo es infinito...</h2>
-            <h2 class="typewriter delay">pero yo encontré su centro en ti.</h2>
-            <div class="scroll-text-body">
-                <p class="intro-subtext">
-                    Cada risa, cada foto y cada canción son estrellas solitarias,<br>
-                    pero juntas, forman la única constelación que importa: <b>Tú</b>.
-                </p>
+
+    <div class="container">
+        <h1>Cartas para Sofi ✨</h1>
+        <p class="instruction">Haz clic en un sobre para descubrir el mensaje</p>
+
+        <div class="gallery">
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope">
+                    <div class="heart-seal"></div>
+                    <div class="label">Abre cuando... <br><b>estés triste</b> ☁️</div>
+                </div>
+                <div class="letter-content">
+                    <h3>Para los días grises 💙</h3>
+                    <p>Mi amor, recuerda que incluso las nubes más oscuras no pueden ocultar el sol para siempre. Estoy aquí para ser tu paraguas. Te amo infinito.</p>
+                    <button onclick="closeLetter(event, this)">Guardar carta</button>
+                </div>
             </div>
-            <button id="start-btn">Entrar a nuestra galaxia</button>
+
+            <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope" style="background: var(--blue-accent);"> <div class="heart-seal"></div>
+                    <div class="label">Abre cuando... <br><b>me extrañes</b> 🌙</div>
+                </div>
+                <div class="letter-content">
+                    <h3>Cierra los ojitos...</h3>
+                    <p>¿Los cerraste? Bien. Ahora siente este abrazo fuerte que te mando a la distancia. No importa qué tan lejos estemos, mi corazón siempre está al ladito del tuyo.</p>
+                    <button onclick="closeLetter(event, this)">Guardar carta</button>
+                </div>
+            </div>
+            
+             <div class="envelope-wrapper" onclick="openLetter(event, this)">
+                <div class="envelope">
+                    <div class="heart-seal"></div>
+                    <div class="label">Abre cuando... <br><b>necesites un "Te Amo"</b> 💙</div>
+                </div>
+                <div class="letter-content">
+                    <h3>¡TE AMO!</h3>
+                    <p>Solo quería recordártelo. Eres la persona más especial de mi universo. Gracias por existir, Sofi.</p>
+                    <button onclick="closeLetter(event, this)">Guardar carta</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div id="ui-container">
-        <h1 class="title">Sofi</h1>
-    </div>
-
-    <div id="memory-modal" class="hidden">
-        <div class="modal-content">
-            <span id="close-modal">×</span>
-            <div id="memory-body">
-                <img id="memory-img" src="" alt="Recuerdo" class="hidden">
-                <p id="memory-text"></p>
-                <a id="memory-link" href="#" target="_blank" class="music-btn hidden">Escuchar canción 🎵</a>
-            </div>
-        </div>
-    </div>
-
-    <canvas id="bg"></canvas>
-
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-            }
-        }
-    </script>
-    <script type="module" src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
