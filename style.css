@@ -3,40 +3,39 @@
     --blue-medium: #42a5f5;
     --blue-light: #e3f2fd;
     --white: #ffffff;
-    --gold: #ffd700;
 }
 
 body {
-    /* Fondo radial tierno azulado */
+    /* Fondo tierno azulado */
     background: radial-gradient(circle at center, var(--white) 0%, var(--blue-light) 100%);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif; /* Fuente redondita y legible */
     margin: 0;
     padding: 20px;
     min-height: 100vh;
 }
 
 .container { 
-    max-width: 1100px; 
+    max-width: 1000px; 
     margin: 0 auto;
     text-align: center; 
 }
 
 h1 { 
     color: var(--blue-dark); 
-    font-family: 'Dancing Script', cursive; 
-    font-size: 3.5rem; 
+    font-family: 'Pacifico', cursive; /* Título bonito pero claro */
+    font-size: 3rem; 
     margin-bottom: 5px; 
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
 }
 
-.subtitle { color: #666; font-size: 1.1rem; margin-bottom: 30px; }
+.subtitle { color: #555; font-size: 1.1rem; margin-bottom: 30px; font-weight: 600; }
 
-/* --- GRID SYSTEM --- */
+/* --- GRID SYSTEM (Alineación en grupos) --- */
 .gallery {
     display: grid;
-    /* Columnas automáticas y responsivas */
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 25px;
+    /* Esto hace que se alineen en filas y columnas automáticamente */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
     padding: 10px;
 }
 
@@ -46,15 +45,15 @@ h1 {
     perspective: 1000px;
     transition: transform 0.3s;
 }
-.envelope-wrapper:hover { transform: scale(1.05) rotate(1deg); }
+.envelope-wrapper:hover { transform: translateY(-5px); }
 
 .envelope {
     background: var(--blue-medium);
-    border-radius: 12px;
-    padding: 20px 10px;
+    border-radius: 15px; /* Bordes más redondos = más tierno */
+    padding: 15px 10px;
     color: white;
-    box-shadow: 0 5px 15px rgba(66, 165, 245, 0.3);
-    min-height: 130px;
+    box-shadow: 0 4px 10px rgba(66, 165, 245, 0.3);
+    min-height: 110px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,30 +63,31 @@ h1 {
 
 .envelope.special { background: var(--blue-dark); }
 
-.seal { font-size: 2.2rem; margin-bottom: 8px; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-.label { font-size: 0.95rem; line-height: 1.3; font-weight: 300; }
-.label b { font-weight: 600; display: block; margin-top: 4px; }
+.seal { font-size: 2rem; margin-bottom: 5px; }
+.label { font-size: 0.9rem; line-height: 1.3; font-weight: 500; }
+.label b { font-weight: 700; display: block; }
 
-/* --- LA CARTA MODAL --- */
+/* --- LA CARTA EXPANDIDA --- */
 .letter-content {
     position: fixed;
     top: 50%;
     left: 50%;
+    /* Empieza pequeña (scale 0) */
     transform: translate(-50%, -50%) scale(0);
     
-    /* Responsive y Scroll */
+    /* Tamaño y Scroll */
     width: 85%;
-    max-width: 450px;
+    max-width: 420px;
     max-height: 85vh;
-    overflow-y: auto; /* Scroll si el contenido es largo */
+    overflow-y: auto; 
     
     background: white;
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 0 100px rgba(0,0,0,0.2);
+    box-shadow: 0 0 100px rgba(21, 101, 192, 0.3);
     z-index: 1000;
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
     pointer-events: none;
     display: flex;
     flex-direction: column;
@@ -95,48 +95,48 @@ h1 {
     border: 4px solid var(--blue-light);
 }
 
-/* Estado abierto */
+/* Cuando se abre */
 .envelope-wrapper.open .letter-content {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1); /* Se expande a tamaño real */
     opacity: 1;
     pointer-events: auto;
 }
 
 .letter-content h3 { 
     color: var(--blue-dark); 
-    font-family: 'Dancing Script', cursive; 
-    font-size: 2.2rem; 
+    font-family: 'Pacifico', cursive; 
+    font-size: 2rem; 
     margin: 0 0 15px 0;
 }
 
 .letter-content p { 
-    color: #555; 
-    font-size: 1rem; 
+    color: #444; 
+    font-size: 1.05rem; 
     line-height: 1.6; 
     text-align: center;
     width: 100%;
     margin-bottom: 20px;
 }
 
-/* Estilo para las fotos dentro de cartas */
+/* Imágenes dentro de cartas */
 .letter-img {
     width: 100%;
     max-height: 250px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 12px;
     margin-bottom: 15px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Botón de cerrar */
+/* Botón */
 .close-btn {
     background: var(--blue-medium);
     color: white;
-    padding: 10px 30px;
+    padding: 12px 30px;
     border-radius: 50px;
     cursor: pointer;
-    font-weight: 500;
-    box-shadow: 0 4px 10px rgba(66, 165, 245, 0.4);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(66, 165, 245, 0.4);
     transition: background 0.2s;
 }
 .close-btn:hover { background: var(--blue-dark); }
