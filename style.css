@@ -14,10 +14,15 @@ body {
     background-color: var(--bg-color);
     font-family: 'Fredoka', sans-serif;
     text-align: center;
-    overflow: hidden;
+    /* Importante: Permitimos scroll si la pantalla es muy pequeña */
+    overflow-y: auto; 
 }
 
-.game-container { width: 90%; max-width: 450px; }
+.game-container { 
+    width: 90%; 
+    max-width: 450px; 
+    padding: 20px 0; /* Un poco de aire arriba y abajo */
+}
 
 h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
 .subtitle { color: #ad1457; margin-bottom: 50px; font-size: 1.1rem; }
@@ -26,23 +31,32 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
 .track-container {
     position: relative;
     width: 100%;
-    height: 80px; /* Más alto para que quepan los emojis */
+    height: 100px; /* Aumenté la altura para que quepan bien los stickers */
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Estilo para la imagen de la META */
 .goal {
     position: absolute;
     right: 0;
-    top: -15px;
-    font-size: 3.5rem;
+    top: -30px; /* Ajusta esto si tu sticker queda muy arriba o abajo */
     z-index: 1;
-    /* Un pequeño lazo rosa para diferenciarla si quieres */
-    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); 
     transition: transform 0.3s;
 }
 
+.goal-img {
+    width: 80px; /* Tamaño del sticker de meta */
+    height: auto;
+    filter: drop-shadow(0 4px 5px rgba(0,0,0,0.2));
+}
+
 .km-counter {
-    margin-top: 10px;
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
     font-weight: bold;
     color: #880e4f;
     opacity: 0.7;
@@ -58,44 +72,49 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
     position: relative;
     z-index: 2;
-    transition: background 0.3s;
 }
 
-/* El Botón Deslizable (TU MONKY VIAJERA) */
+/* --- EL BOTÓN DESLIZABLE (TU STICKER VIAJERO) --- */
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 65px;
-    height: 65px;
+    width: 85px; /* Tamaño del sticker que se mueve */
+    height: 85px;
     background: transparent;
     border: none;
     cursor: grab;
     
-    /* Emoji de Monky #1 */
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐵</text></svg>");
+    /* --- AQUÍ VA TU FOTO --- */
+    background-image: url('fotos/monky-viajero.png'); 
+    background-size: contain; /* Ajusta la imagen al tamaño */
     background-repeat: no-repeat;
     background-position: center;
     
+    transform: translateY(-5px); /* Pequeño ajuste vertical */
     transition: transform 0.2s;
 }
 
 .slider::-webkit-slider-thumb:active {
     cursor: grabbing;
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-5px);
 }
 
-/* --- LA CARTA --- */
+/* --- LA CARTA (SOLUCIÓN SCROLL) --- */
 .letter-box {
     background: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(136, 14, 79, 0.2);
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efecto rebote */
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
-    margin-top: 30px;
+    margin-top: 40px;
     border: 2px solid #f8bbd0;
+
+    /* --- ESTO ARREGLA QUE SE CORTE EL TEXTO --- */
+    max-height: 50vh; /* La carta ocupará máximo la mitad de la pantalla */
+    overflow-y: auto; /* Si el texto es más largo, aparece scroll DENTRO de la carta */
 }
 
 .letter-box.show {
