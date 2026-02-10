@@ -1,29 +1,27 @@
 function openLetter(event, element) {
-    // 1. Efecto visual de abrir
+    // 1. Abrir la carta
     element.classList.add('open');
     
-    // 2. Efecto de partículas (Sparkles de corazón)
+    // 2. Confeti (Corazones azules y blancos)
     var defaults = {
         spread: 360,
         ticks: 50,
         gravity: 0,
         decay: 0.94,
         startVelocity: 30,
-        colors: ['#42a5f5', '#1565c0', '#82b1ff', '#ffffff'] // Azules y blanco
+        colors: ['#42a5f5', '#1565c0', '#82b1ff', '#ffffff'] 
     };
     
-    // Lanzar corazones normales
     confetti({
         ...defaults,
-        particleCount: 40,
+        particleCount: 50,
         scalar: 1.2,
         shapes: ['heart']
     });
     
-    // Lanzar corazones pequeños (brillitos)
     confetti({
         ...defaults,
-        particleCount: 20,
+        particleCount: 30,
         scalar: 0.75,
         shapes: ['heart']
     });
@@ -31,6 +29,5 @@ function openLetter(event, element) {
 
 function closeLetter(event, btn) {
     event.stopPropagation();
-    // Cierra la carta buscando el contenedor padre
     btn.closest('.envelope-wrapper').classList.remove('open');
 }
