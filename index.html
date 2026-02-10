@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monkyesposas 🐒💖🐒</title>
+    <title>Monky & Monky 🐒💖🐒</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
@@ -12,17 +12,21 @@
 
     <div class="game-container">
         <h1>Acorta la distancia 🌍</h1>
-        <p class="subtitle">Ayuda a mi monky a llegar hasta ti</p>
+        <p class="subtitle">Ayuda a mi Monky a llegar hasta ti</p>
 
         <div class="track-container">
             
-            <div class="goal">
+            <div class="goal" id="goalMonky">
                 <img src="fotos/monky-meta.png" alt="Meta" class="goal-img">
+            </div>
+
+            <div class="hug-sticker" id="hugSticker">
+                <img src="fotos/monkys-abrazados.png" alt="Abrazo" class="hug-img">
             </div>
             
             <input type="range" min="0" max="100" value="0" class="slider" id="loveSlider" oninput="checkHug()">
             
-            <div class="km-counter" id="kmText">1031 km</div>
+            <div class="km-counter" id="kmText">3000 km</div>
         </div>
 
         <div id="hidden-letter" class="letter-box">
@@ -30,8 +34,7 @@
             <p>
                 No importan los kilómetros, ni las horas de diferencia, ni las pantallas.<br><br>
                 Mi lugar favorito en el mundo es justo ahí: <b>a tu lado.</b><br><br>
-                Pronto esta distancia será de 0 centímetros para siempre.<br><br>
-                Te amo con todo mi corazón de Monky.
+                Pronto esta distancia será de 0 centímetros para siempre.
             </p>
             <div class="heart-icon">💖</div>
         </div>
