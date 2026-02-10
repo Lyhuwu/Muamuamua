@@ -6,9 +6,8 @@ function checkHug() {
     const kmText = document.getElementById('kmText');
     const body = document.querySelector('body');
 
-    // 1. Calcular Kilómetros restantes (Efecto visual)
-    // Suponemos 3000km de distancia máxima (puedes cambiar este número)
-    let maxKm = 3000; 
+    // 1. Calcular Kilómetros (Efecto visual)
+    let maxKm = 3000; // Puedes cambiar este número por la distancia real
     let currentKm = Math.round(maxKm - (maxKm * (value / 100)));
     
     if (currentKm <= 0) {
@@ -21,15 +20,15 @@ function checkHug() {
     if (value > 98) {
         
         // Animación de abrazo: La Monky meta se inclina hacia la viajera
-        goal.style.transform = "scale(1.3) rotate(-10deg) translateX(-10px)";
+        goal.style.transform = "scale(1.2) rotate(-10deg) translateX(-10px)";
         
         // Cambiar color de fondo a celebración
-        body.style.backgroundColor = "#ffcdd2"; // Un rosa más intenso
+        body.style.backgroundColor = "#ffcdd2"; 
 
         if (!letter.classList.contains('show')) {
             letter.classList.add('show');
             
-            // ¡CONFETI DOBLE! (Lluvia de corazones)
+            // ¡CONFETI DOBLE! 
             var defaults = {
                 spread: 360,
                 ticks: 50,
