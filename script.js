@@ -2,12 +2,15 @@ function checkHug() {
     const slider = document.getElementById('loveSlider');
     const value = slider.value;
     const letter = document.getElementById('hidden-letter');
-    const goal = document.querySelector('.goal');
+    
+    // Elementos nuevos
+    const goalMonky = document.getElementById('goalMonky');
+    const hugSticker = document.getElementById('hugSticker');
     const kmText = document.getElementById('kmText');
     const body = document.querySelector('body');
 
-    // 1. Calcular Kilómetros (Efecto visual)
-    let maxKm = 3000; // Puedes cambiar este número por la distancia real
+    // 1. Calcular Kilómetros
+    let maxKm = 3000; 
     let currentKm = Math.round(maxKm - (maxKm * (value / 100)));
     
     if (currentKm <= 0) {
@@ -16,19 +19,25 @@ function checkHug() {
         kmText.innerText = currentKm + " km restantes";
     }
 
-    // 2. Si las Monkys están cerca (más del 98%)
+    // 2. DETECTAR EL ENCUENTRO (Final del slider)
     if (value > 98) {
         
-        // Animación de abrazo: La Monky meta se inclina hacia la viajera
-        goal.style.transform = "scale(1.2) rotate(-10deg) translateX(-10px)";
+        // --- AQUÍ OCURRE LA MAGIA DEL CAMBIO ---
         
-        // Cambiar color de fondo a celebración
+        // A. Ocultar los individuales
+        goalMonky.classList.add('opacity-0');       // Oculta meta
+        slider.classList.add('hide-thumb');         // Oculta viajera
+        
+        // B. Mostrar el abrazo
+        hugSticker.classList.add('show');
+
+        // C. Cambiar fondo
         body.style.backgroundColor = "#ffcdd2"; 
 
+        // D. Mostrar carta y confeti (si no ha salido ya)
         if (!letter.classList.contains('show')) {
             letter.classList.add('show');
             
-            // ¡CONFETI DOBLE! 
             var defaults = {
                 spread: 360,
                 ticks: 50,
@@ -45,7 +54,7 @@ function checkHug() {
                 shapes: ['heart']
             });
 
-            // Bloquear slider para que se queden abrazadas
+            // Bloquear slider
             slider.disabled = true;
         }
     }
