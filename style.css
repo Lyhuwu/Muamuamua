@@ -1,47 +1,79 @@
 :root {
-    --bg-color: #fce4ec;
+    --bg-color: #fce4ec; /* Rosa muy suave */
     --track-color: #f8bbd0;
     --accent: #d81b60;
 }
 
 body {
-    margin: 0; padding: 0; height: 100vh;
-    display: flex; justify-content: center; align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--bg-color);
     font-family: 'Fredoka', sans-serif;
     text-align: center;
+    /* IMPORTANTE: Permite bajar la pantalla si la carta es muy larga */
     overflow-y: auto; 
 }
 
-.game-container { width: 90%; max-width: 450px; padding: 20px 0; }
-h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
-.subtitle { color: #ad1457; margin-bottom: 50px; font-size: 1.1rem; }
+.game-container { 
+    width: 90%; 
+    max-width: 450px; 
+    padding: 20px 0;
+}
 
+h1 { 
+    color: #880e4f; 
+    margin-bottom: 5px; 
+    font-size: 2rem; 
+}
+
+.subtitle { 
+    color: #ad1457; 
+    margin-bottom: 50px; 
+    font-size: 1.1rem; 
+}
+
+/* --- EL ESCENARIO (TRACK) --- */
 .track-container {
     position: relative;
     width: 100%;
     height: 100px;
     margin-bottom: 20px;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* --- MONKY META INDIVIDUAL --- */
+/* --- 1. MONKY META INDIVIDUAL --- */
 .goal {
-    position: absolute; right: 0; top: -30px; z-index: 1;
-    transition: opacity 0.3s; /* Para que desaparezca suave */
+    position: absolute;
+    right: 0;
+    top: -30px; /* Ajusta esto si tu sticker flota mucho */
+    z-index: 1;
+    transition: opacity 0.3s;
 }
-.goal-img { width: 80px; height: auto; }
 
-/* --- NUEVO: MONKYS ABRAZADOS (Oculto al inicio) --- */
+.goal-img {
+    width: 80px;
+    height: auto;
+    filter: drop-shadow(0 4px 5px rgba(0,0,0,0.2));
+}
+
+/* --- 2. MONKYS ABRAZADOS (Oculto al inicio) --- */
 .hug-sticker {
     position: absolute;
-    right: 0; top: -40px; /* Ajusta esto para centrar el abrazo */
+    right: 0;
+    top: -40px; /* Ajusta para centrar el abrazo */
     z-index: 10;
-    opacity: 0;
+    opacity: 0; /* Invisible al principio */
     transform: scale(0.5);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
 }
+
 .hug-img {
     width: 120px; /* Un poco más grande porque son dos */
     height: auto;
@@ -54,49 +86,108 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     transform: scale(1);
 }
 
-/* Clase para ocultar los individuales */
-.opacity-0 { opacity: 0; }
+/* Clase auxiliar para ocultar cosas */
+.opacity-0 {
+    opacity: 0;
+}
 
 .km-counter {
-    position: absolute; bottom: -25px; width: 100%;
-    font-weight: bold; color: #880e4f; opacity: 0.7;
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+    font-weight: bold;
+    color: #880e4f;
+    opacity: 0.7;
 }
 
+/* --- EL SLIDER --- */
 .slider {
-    -webkit-appearance: none; width: 100%; height: 15px;
-    background: #fff; border-radius: 10px; outline: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    background: #fff;
+    border-radius: 10px;
+    outline: none;
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-    position: relative; z-index: 2;
+    position: relative;
+    z-index: 2;
 }
 
+/* --- EL BOTÓN DEL SLIDER (MONKY VIAJERO) --- */
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; appearance: none;
-    width: 85px; height: 85px;
-    background: transparent; border: none; cursor: grab;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 85px; /* Tamaño del sticker */
+    height: 85px;
+    background: transparent;
+    border: none;
+    cursor: grab;
+    
+    /* TU FOTO AQUÍ */
     background-image: url('fotos/monky-viajero.png'); 
-    background-size: contain; background-repeat: no-repeat; background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
     transform: translateY(-5px);
     transition: all 0.2s;
 }
 
-/* --- TRUCO PRO: Ocultar el botón del slider al final --- */
+.slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.1) translateY(-5px);
+}
+
+/* Truco para ocultar el botón del slider al final */
 .slider.hide-thumb::-webkit-slider-thumb {
     opacity: 0;
     transform: scale(0);
 }
 
+/* --- LA CARTA --- */
 .letter-box {
-    background: white; padding: 25px; border-radius: 20px;
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
     box-shadow: 0 10px 40px rgba(136, 14, 79, 0.2);
-    opacity: 0; transform: translateY(30px);
+    opacity: 0;
+    transform: translateY(30px);
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: none; margin-top: 40px;
+    pointer-events: none; /* No se puede tocar si está oculta */
+    margin-top: 40px;
     border: 2px solid #f8bbd0;
-    max-height: 50vh; overflow-y: auto;
+    
+    /* SCROLL INTERNO (Crucial para móviles) */
+    max-height: 50vh;
+    overflow-y: auto;
 }
 
-.letter-box.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
-h2 { color: var(--accent); margin-top: 0; }
-p { color: #555; line-height: 1.6; font-size: 1.1rem; }
-.heart-icon { font-size: 2rem; margin-top: 10px; animation: pulse 1s infinite; }
-@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+/* Clase para mostrar la carta */
+.letter-box.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* IMPORTANTE: Habilita el touch */
+}
+
+h2 { 
+    color: var(--accent); 
+    margin-top: 0; 
+}
+
+p { 
+    color: #555; 
+    line-height: 1.6; 
+    font-size: 1.1rem; 
+}
+
+.heart-icon { 
+    font-size: 2rem; 
+    margin-top: 10px; 
+    animation: pulse 1s infinite; 
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
