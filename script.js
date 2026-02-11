@@ -1,61 +1,58 @@
-let hasWon = false;
-const slider = document.getElementById('loveSlider');
-
-// --- DIFICULTAD ---
-slider.addEventListener('touchend', slideBack);
-slider.addEventListener('mouseup', slideBack);
-
-function slideBack() {
-    if (hasWon) return;
-    let currentValue = parseInt(slider.value);
-    if (currentValue < 99) {
-        let interval = setInterval(() => {
-            if (hasWon) { clearInterval(interval); return; }
-            slider.value = parseInt(slider.value) - 2; 
-            updateKmText(slider.value);
-            if (slider.value <= 0) { clearInterval(interval); }
-        }, 15);
-    }
-}
-
-function updateKmText(val) {
-    const kmText = document.getElementById('kmText');
-    let maxKm = 3000;
-    let currentKm = Math.round(maxKm - (maxKm * (val / 100)));
-    if (!hasWon) { kmText.innerText = currentKm + " km restantes"; }
-}
-
-// --- LÓGICA PRINCIPAL ---
 function checkHug() {
-    if (hasWon) { slider.value = 100; return; }
-
-    const value = parseInt(slider.value);
+    const slider = document.getElementById('loveSlider');
+    const value = slider.value;
     const letter = document.getElementById('hidden-letter');
+    
+    // Elementos para el cambio de stickers
     const goalMonky = document.getElementById('goalMonky');
     const hugSticker = document.getElementById('hugSticker');
     const kmText = document.getElementById('kmText');
     const body = document.querySelector('body');
-    const achievement = document.getElementById('achievement');
 
-    updateKmText(value);
-
-    if (value >= 99) {
-        hasWon = true; 
+    // 1. Calcular Kilómetros
+    let maxKm = 3000; 
+    let currentKm = Math.round(maxKm - (maxKm * (value / 100)));
+    
+    if (currentKm <= 0) {
         kmText.innerText = "¡Juntas! ❤️";
-        
-        goalMonky.classList.add('opacity-0');
-        slider.classList.add('hide-thumb');
-        hugSticker.classList.add('show');
-        
-        achievement.classList.add('show');
-        setTimeout(() => { achievement.classList.remove('show'); }, 5000);
+    } else {
+        kmText.innerText = currentKm + " km restantes";
+    }
 
+    // 2. DETECTAR EL ENCUENTRO
+    if (value > 98) {
+        
+        // A. Ocultar los individuales
+        goalMonky.classList.add('opacity-0');       
+        slider.classList.add('hide-thumb');         
+        
+        // B. Mostrar el abrazo gigante
+        hugSticker.classList.add('show');
+
+        // C. Cambiar fondo
         body.style.backgroundColor = "#ffcdd2"; 
 
+        // D. Mostrar carta y confeti
         if (!letter.classList.contains('show')) {
             letter.classList.add('show');
-            var defaults = { spread: 360, ticks: 50, gravity: 0, decay: 0.94, startVelocity: 30, colors: ['#d81b60', '#f06292', '#ffffff'] };
-            confetti({ ...defaults, particleCount: 100, scalar: 1.2, shapes: ['heart'] });
+            
+            var defaults = {
+                spread: 360,
+                ticks: 50,
+                gravity: 0,
+                decay: 0.94,
+                startVelocity: 30,
+                colors: ['#d81b60', '#f06292', '#ffffff']
+            };
+
+            confetti({
+                ...defaults,
+                particleCount: 100,
+                scalar: 1.2,
+                shapes: ['heart']
+            });
+
+            // Bloquear slider para que se queden abrazadas
             slider.disabled = true;
         }
     }
