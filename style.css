@@ -78,7 +78,7 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     position: absolute; 
     right: 0; 
     /* BAJAMOS A LA MONKY (Antes estaba en -55px) */
-    top: -20px; 
+    top: -10px; 
     z-index: 1; 
     transition: opacity 0.3s; 
 }
