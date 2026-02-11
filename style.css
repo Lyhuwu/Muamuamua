@@ -101,7 +101,7 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     right: 0; 
     
     /* BAJAMOS A LA MONKY para que pise la línea */
-    top: -5px; 
+    top: 0px; 
     
     /* CAPA SUPERIOR: Ahora estará ENCIMA de la línea blanca */
     z-index: 3; 
@@ -117,7 +117,7 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
 /* --- ABRAZO FINAL (CORREGIDO) --- */
 .hug-sticker {
     position: absolute; 
-    right: -10px; 
+    right: -30px; 
     
     /* BAJAMOS EL ABRAZO TAMBIÉN */
     top: -10px; 
