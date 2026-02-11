@@ -8,29 +8,26 @@ slider.addEventListener('touchend', slideBack);
 slider.addEventListener('mouseup', slideBack);
 
 function slideBack() {
-    // Si ya ganó, no se regresa
-    if (hasWon) return;
+    if (hasWon) return; // Si ganó, no hace nada
 
     let currentValue = parseInt(slider.value);
 
-    // Si suelta antes de llegar al 99%
+    // Si suelta antes del 99%
     if (currentValue < 99) {
         let interval = setInterval(() => {
-            // Si por alguna razón gana mientras retrocede (raro), paramos
             if (hasWon) {
                 clearInterval(interval);
                 return;
             }
-            
             // Retrocede
             slider.value = parseInt(slider.value) - 2; 
             updateKmText(slider.value);
 
-            // Si llega al inicio, paramos
+            // Si llega a 0, para
             if (slider.value <= 0) {
                 clearInterval(interval);
             }
-        }, 15); // Velocidad del retroceso
+        }, 15);
     }
 }
 
@@ -46,7 +43,6 @@ function updateKmText(val) {
 
 // --- 2. LÓGICA PRINCIPAL ---
 function checkHug() {
-    // Si ya ganó, no hacemos nada más que forzar el final
     if (hasWon) {
         slider.value = 100;
         return; 
@@ -62,18 +58,17 @@ function checkHug() {
 
     updateKmText(value);
 
-    // --- DETECTAR VICTORIA ---
+    // --- VICTORIA ---
     if (value >= 99) {
-        hasWon = true; // ¡Bloqueamos para que solo pase una vez!
+        hasWon = true; // Bloquea para que solo pase una vez
         
         kmText.innerText = "¡Juntas! ❤️";
         
-        // Cambio de Monkys
         goalMonky.classList.add('opacity-0');
         slider.classList.add('hide-thumb');
         hugSticker.classList.add('show');
         
-        // Muestra el logro (SOLO UNA VEZ GRACIAS A hasWon)
+        // Muestra el logro (SOLO UNA VEZ)
         achievement.classList.add('show');
         setTimeout(() => {
             achievement.classList.remove('show');
@@ -100,7 +95,6 @@ function checkHug() {
                 shapes: ['heart']
             });
             
-            // Deshabilitar slider
             slider.disabled = true;
         }
     }
