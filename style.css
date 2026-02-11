@@ -13,16 +13,40 @@ body {
     overflow-y: auto; /* Permite scroll si la pantalla es chica */
 }
 
-/* --- ESTILO DEL LOGRO XBOX (Corrección) --- */
+/* --- ESTILO DEL LOGRO XBOX (CORREGIDO DEFINITIVO) --- */
 .achievement-banner {
     position: fixed;
-    top: -150px; /* Escondido bien arriba */
+    top: 0;
     left: 50%;
-    transform: translateX(-50%);
+    /* AQUÍ ESTÁ EL TRUCO: */
+    /* Lo movemos hacia arriba el 120% de su altura (fuera de pantalla) y lo centramos horizontalmente */
+    transform: translate(-50%, -120%);
     width: 300px;
     z-index: 9999; /* Siempre encima de todo */
-    transition: top 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efecto rebote al bajar */
-    pointer-events: none; /* Para que no estorbe si es invisible */
+    /* Usamos 'transform' para la transición, es más suave en celulares */
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
+    pointer-events: none; /* Para que no estorbe al touch */
+
+    /* SEGURO EXTRA: Totalmente invisible mientras está arriba */
+    opacity: 0;
+}
+
+.achievement-banner img {
+    width: 100%;
+    border-radius: 50px; /* Redondeado estilo notificación */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Sombra bonita */
+    display: block;
+    /* Un pequeño borde blanco para que resalte más */
+    border: 3px solid white;
+}
+
+/* Clase para que baje (aparezca) */
+.achievement-banner.show {
+    /* Lo bajamos a 20px del borde superior */
+    transform: translate(-50%, 20px);
+    /* Lo hacemos visible */
+    opacity: 1;
+}
 }
 
 .achievement-banner img {
