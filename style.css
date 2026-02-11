@@ -42,33 +42,38 @@ body {
     pointer-events: none;
 }
 
-/* El círculo verde */
+/* El círculo verde (Contenedor) */
 .xbox-icon {
-    width: 50px; height: 50px;
-    background-color: #107c10;
+    width: 50px; 
+    height: 50px;
+    background-color: #107c10; /* Color Verde Xbox */
     border-radius: 50%;
     
-    /* CAMBIO 1: Quitamos el flexbox de centrado, no hace falta */
-    /* display: flex; justify-content: center; align-items: center; */
+    /* Alineación segura */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
     
-    position: relative; /* Asegura el contexto para la imagen hija */
-    overflow: hidden; /* Corta el GIF en forma de círculo */
-    margin-right: 15px; margin-left: 5px;
-    box-shadow: none; 
+    /* Importante: Corta lo que se salga del círculo */
+    overflow: hidden; 
+    
+    margin-right: 15px; 
+    margin-left: 5px;
+    
+    /* Evita que se deforme */
+    flex-shrink: 0;
 }
 
-/* Tu GIF dentro del círculo */
+/* Tu GIF (Imagen) */
 .gif-icon {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Intenta cubrir todo el espacio */
-    display: block; /* CAMBIO 2: Asegura que no haya espacios extraños abajo */
     
-    /* --- TRUCO EXTRA "BAZUCA" --- */
-    /* Si SIGUE viéndose verde alrededor, significa que tu GIF tiene bordes transparentes. */
-    /* Descomenta (quita los /* y */) la línea de abajo para hacerle un pequeño zoom al GIF */
+    /* Esto obliga a la imagen a cubrir todo el espacio sin deformarse */
+    object-fit: cover; 
     
-    /* transform: scale(1.2); */ 
+    /* TRUCO FINAL: Un pequeño zoom del 20% para eliminar cualquier borde vacío */
+    transform: scale(1.2); 
 }
 
 .xbox-content {
