@@ -13,15 +13,15 @@ body {
     overflow-y: auto; 
 }
 
-/* --- LOGRO XBOX (LIMPIO Y PLANO) --- */
+/* --- LOGRO XBOX (LIMPIO, SIN BORDES NI SOMBRAS) --- */
 .xbox-achievement {
     position: fixed;
-    top: -100px;
+    top: -100px; /* Escondido arriba */
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
     
-    /* Fondo oscuro plano sin sombras raras */
+    /* Fondo oscuro plano */
     background-color: #1f1f1f; 
     color: white;
     width: 320px;
@@ -31,7 +31,7 @@ body {
     align-items: center;
     padding: 5px;
     
-    /* Eliminamos sombras y bordes para quitar la "profundidad" rara */
+    /* Cero bordes, cero sombras externas */
     box-shadow: none; 
     border: none;
     
@@ -46,7 +46,6 @@ body {
     display: flex; justify-content: center; align-items: center;
     font-size: 25px;
     margin-right: 15px; margin-left: 5px;
-    /* Sin sombra en el icono tampoco */
     box-shadow: none; 
 }
 
@@ -67,38 +66,43 @@ body {
 h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
 .subtitle { color: #ad1457; margin-bottom: 10px; font-size: 1.1rem; font-weight: bold; }
 
-/* --- CONTENEDOR DE LA PISTA (TRACK) --- */
+/* --- PISTA (TRACK) --- */
 .track-container {
     position: relative; 
     width: 100%; 
     height: 120px;
-    /* AUMENTÉ ESTO: Da espacio para que los monos no tapen el título */
-    margin-top: 60px; 
+    margin-top: 60px; /* Espacio para que no tapen el título */
     margin-bottom: 20px; 
     display: flex; align-items: center; justify-content: center;
 }
 
-/* --- MONKYS --- */
+/* --- MONKYS (ALINEACIÓN CORREGIDA) --- */
+
+/* 1. Monky Meta (Individual) */
 .goal { 
     position: absolute; 
-    right: 0; 
-    /* Ajuste de altura para que no floten tanto */
-    top: -55px; 
+    /* MISMAS COORDENADAS QUE EL ABRAZO */
+    right: -10px; 
+    top: -60px; 
     z-index: 1; 
     transition: opacity 0.3s; 
 }
 .goal-img { width: 80px; height: auto; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1)); }
 
+/* 2. Monkys Abrazados */
 .hug-sticker {
     position: absolute; 
-    right: -10px; /* Un poco a la derecha para centrar el abrazo */
-    top: -65px; /* Altura ajustada */
+    /* MISMAS COORDENADAS QUE LA META */
+    right: -10px; 
+    top: -60px; 
     z-index: 10;
     opacity: 0; transform: scale(0.5);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
 }
+/* Hacemos la imagen del abrazo un pelín más grande para que impacte */
 .hug-img { width: 140px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+
 .hug-sticker.show { opacity: 1; transform: scale(1); }
 .opacity-0 { opacity: 0; }
 
