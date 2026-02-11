@@ -40,27 +40,36 @@ body {
     pointer-events: none;
 }
 
+/* Círculo verde (El contenedor) */
 .xbox-icon {
-    width: 50px; 
+    width: 50px;
     height: 50px;
-    background-color: #107c10; /* Verde Xbox */
-    border-radius: 50%;
-    
-    display: flex; 
-    justify-content: center; 
+    background-color: #107c10; /* Mantenemos el fondo verde Xbox */
+    border-radius: 50%; /* Forma circular */
+
+    /* Importante: Corta lo que se salga del círculo */
+    overflow: hidden;
+
+    /* Centrado */
+    display: flex;
+    justify-content: center;
     align-items: center;
-    overflow: hidden; 
-    
-    margin-right: 15px; 
+
+    margin-right: 15px;
     margin-left: 5px;
     flex-shrink: 0;
 }
 
+/* Tu GIF transparente (La imagen) */
 .gif-icon {
-    /* Ajuste para que se vea completo dentro del círculo */
-    width: 80%; 
-    height: 80%; 
-    object-fit: contain; 
+    /* AHORA SÍ: Ocupar todo el espacio */
+    width: 100%;
+    height: 100%;
+
+    /* CLAVE: 'cover' hace que la imagen llene todo el círculo.
+       Al ser transparente, se verá genial sobre el fondo verde. */
+    object-fit: cover;
+
     display: block;
 }
 
