@@ -1,59 +1,56 @@
-function checkHug() {
-    const slider = document.getElementById('loveSlider');
-    const value = slider.value;
-    const letter = document.getElementById('hidden-letter');
-    
-    // Elementos para el cambio de stickers
-    const goalMonky = document.getElementById('goalMonky');
-    const hugSticker = document.getElementById('hugSticker');
-    const kmText = document.getElementById('kmText');
-    const body = document.querySelector('body');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Monky & Monky 🐒💖🐒</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
 
-    // 1. Calcular Kilómetros
-    let maxKm = 3000; 
-    let currentKm = Math.round(maxKm - (maxKm * (value / 100)));
-    
-    if (currentKm <= 0) {
-        kmText.innerText = "¡Juntas! ❤️";
-    } else {
-        kmText.innerText = currentKm + " km restantes";
-    }
+    <div id="achievement" class="xbox-achievement">
+        <div class="xbox-icon">
+            <img src="fotos/icono-logro.gif" alt="Icono">
+        </div>
+        <div class="xbox-content">
+            <div class="xbox-title">Logro desbloqueado</div>
+            <div class="xbox-text">Juntas por fin - 100G</div>
+        </div>
+    </div>
 
-    // 2. DETECTAR EL ENCUENTRO
-    if (value > 98) {
-        
-        // A. Ocultar los individuales
-        goalMonky.classList.add('opacity-0');       
-        slider.classList.add('hide-thumb');         
-        
-        // B. Mostrar el abrazo gigante
-        hugSticker.classList.add('show');
+    <div class="game-container">
+        <h1>Acorta la distancia 🌍</h1>
+        <p class="subtitle">¡No lo sueltes o se regresará!</p>
 
-        // C. Cambiar fondo
-        body.style.backgroundColor = "#ffcdd2"; 
-
-        // D. Mostrar carta y confeti
-        if (!letter.classList.contains('show')) {
-            letter.classList.add('show');
+        <div class="track-container">
             
-            var defaults = {
-                spread: 360,
-                ticks: 50,
-                gravity: 0,
-                decay: 0.94,
-                startVelocity: 30,
-                colors: ['#d81b60', '#f06292', '#ffffff']
-            };
+            <div class="goal" id="goalMonky">
+                <img src="fotos/monky-meta.png" alt="Meta" class="goal-img">
+            </div>
 
-            confetti({
-                ...defaults,
-                particleCount: 100,
-                scalar: 1.2,
-                shapes: ['heart']
-            });
+            <div class="hug-sticker" id="hugSticker">
+                <img src="fotos/monkys-abrazados.png" alt="Abrazo" class="hug-img">
+            </div>
+            
+            <input type="range" min="0" max="100" value="0" class="slider" id="loveSlider" oninput="checkHug()">
+            
+            <div class="km-counter" id="kmText">3000 km</div>
+        </div>
 
-            // Bloquear slider para que se queden abrazadas
-            slider.disabled = true;
-        }
-    }
-}
+        <div id="hidden-letter" class="letter-box">
+            <h2>¡Por fin juntas! 🏡</h2>
+            <p>
+                No importan los kilómetros, ni las horas de diferencia, ni las pantallas.<br><br>
+                Mi lugar favorito en el mundo es justo ahí: <b>a tu lado.</b><br><br>
+                Pronto esta distancia será de 0 centímetros para siempre.<br><br>
+                Te amo con todo mi corazón de Monky.
+            </p>
+            <div class="heart-icon">💖</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
