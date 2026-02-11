@@ -1,43 +1,85 @@
+// Variable para controlar si ya ganó
+let hasWon = false;
+
+// --- LÓGICA DE DIFICULTAD (Retroceso) ---
+const slider = document.getElementById('loveSlider');
+
+// Escuchar cuando suelta el dedo o el mouse
+slider.addEventListener('touchend', slideBack);
+slider.addEventListener('mouseup', slideBack);
+
+function slideBack() {
+    // Si ya ganó, no hacemos nada
+    if (hasWon) return;
+
+    let currentValue = parseInt(slider.value);
+
+    // Si no ha llegado al final (menos de 99), regresamos
+    if (currentValue < 99) {
+        let interval = setInterval(() => {
+            // Bajamos el valor
+            slider.value = parseInt(slider.value) - 2; // Velocidad de retroceso
+            
+            // Actualizamos el texto de KM visualmente mientras baja
+            updateKmText(slider.value);
+
+            // Si llega a 0, paramos
+            if (slider.value <= 0) {
+                clearInterval(interval);
+            }
+        }, 20); // Cada 20ms se mueve un poquito
+    }
+}
+
+// Función auxiliar para actualizar texto (para usar en el retroceso)
+function updateKmText(val) {
+    const kmText = document.getElementById('kmText');
+    let maxKm = 3000;
+    let currentKm = Math.round(maxKm - (maxKm * (val / 100)));
+    if (currentKm > 0) {
+        kmText.innerText = currentKm + " km restantes";
+    }
+}
+
+
+// --- LÓGICA PRINCIPAL ---
 function checkHug() {
-    const slider = document.getElementById('loveSlider');
+    // Si ya ganó, ignoramos movimientos
+    if (hasWon) return;
+
     const value = slider.value;
     const letter = document.getElementById('hidden-letter');
-    
-    // Elementos nuevos
     const goalMonky = document.getElementById('goalMonky');
     const hugSticker = document.getElementById('hugSticker');
     const kmText = document.getElementById('kmText');
     const body = document.querySelector('body');
+    const achievement = document.getElementById('achievement');
 
     // 1. Calcular Kilómetros
-    let maxKm = 3000; 
-    let currentKm = Math.round(maxKm - (maxKm * (value / 100)));
-    
-    if (currentKm <= 0) {
-        kmText.innerText = "¡Juntas! ❤️";
-    } else {
-        kmText.innerText = currentKm + " km restantes";
-    }
+    updateKmText(value);
 
-    // 2. DETECTAR EL ENCUENTRO (Final del slider)
+    // 2. DETECTAR VICTORIA
     if (value > 98) {
+        hasWon = true; // Marcamos que ya ganó para que no retroceda
+        kmText.innerText = "¡Juntas! ❤️";
         
-        // --- AQUÍ OCURRE LA MAGIA DEL CAMBIO ---
+        // A. Ocultar individuales
+        goalMonky.classList.add('opacity-0');
+        slider.classList.add('hide-thumb');
         
-        // A. Ocultar los individuales
-        goalMonky.classList.add('opacity-0');       // Oculta meta
-        slider.classList.add('hide-thumb');         // Oculta viajera
-        
-        // B. Mostrar el abrazo
+        // B. Mostrar abrazo
         hugSticker.classList.add('show');
 
-        // C. Cambiar fondo
+        // C. MOSTRAR LOGRO XBOX (Baja de arriba)
+        achievement.classList.add('show');
+
+        // D. Fondo y efectos
         body.style.backgroundColor = "#ffcdd2"; 
 
-        // D. Mostrar carta y confeti (si no ha salido ya)
         if (!letter.classList.contains('show')) {
             letter.classList.add('show');
             
+            // Confeti
             var defaults = {
                 spread: 360,
                 ticks: 50,
@@ -54,7 +96,7 @@ function checkHug() {
                 shapes: ['heart']
             });
 
-            // Bloquear slider
+            // Bloquear slider completamente
             slider.disabled = true;
         }
     }
