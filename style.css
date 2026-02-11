@@ -1,15 +1,15 @@
 :root {
-    --bg-color: #fce4ec; /* Rosa muy suave */
+    --bg-color: #fce4ec;
     --track-color: #f8bbd0;
     --accent: #d81b60;
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    margin: 0; 
+    padding: 0; 
     height: 100vh;
-    display: flex;
-    justify-content: center;
+    display: flex; 
+    justify-content: center; 
     align-items: center;
     background-color: var(--bg-color);
     font-family: 'Fredoka', sans-serif;
@@ -17,24 +17,27 @@ body {
     overflow-y: auto; 
 }
 
-/* --- LOGRO XBOX (CORREGIDO Y MÁS GRANDE) --- */
+/* --- 1. LOGRO XBOX (Corrección: Oculto arriba) --- */
 .xbox-achievement {
     position: fixed;
-    top: -100px; /* Oculto arriba */
+    /* Empieza bien arriba para que NO se vea la barra negra al inicio */
+    top: -150px; 
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
     
-    background-color: #1f1f1f; /* Fondo oscuro */
+    /* Diseño limpio */
+    background-color: #1f1f1f; 
     color: white;
-    width: 330px; /* Un poquito más ancho para que quepa el GIF grande */
-    height: 65px; /* Un poco más alto */
-    border-radius: 35px; 
+    width: 320px;
+    height: 60px;
+    border-radius: 30px; 
+    
     display: flex;
     align-items: center;
     padding: 5px;
     
-    /* Sin sombras ni bordes para evitar la "capa rara" */
+    /* Sin sombras ni bordes */
     box-shadow: none; 
     border: none;
     
@@ -42,56 +45,55 @@ body {
     pointer-events: none;
 }
 
-//* 1. El círculo verde (Contenedor) */
+/* Círculo verde */
 .xbox-icon {
-    width: 50px;
+    width: 50px; 
     height: 50px;
-    background-color: #107c10; /* Color Verde Xbox */
-    border-radius: 50%; /* Forma de círculo */
+    background-color: #107c10; 
+    border-radius: 50%;
     
-    /* IMPORTANTE: 'overflow: hidden' asegura que la imagen no se salga del círculo */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
     overflow: hidden; 
     
-    margin-right: 15px;
+    margin-right: 15px; 
     margin-left: 5px;
-    
-    /* Evita que se aplaste si el texto es largo */
     flex-shrink: 0;
-    
-    /* Quitamos propiedades extra que podrían interferir */
-    position: relative;
-    display: block; 
 }
 
-/* 2. Tu GIF (Imagen) */
+/* GIF sin zoom */
 .gif-icon {
-    /* Ocupar exactamente el tamaño del círculo */
     width: 100%;
     height: 100%;
-    
-    /* --- LA CLAVE MAESTRA --- */
-    /* 'contain' OBLIGA a mostrar toda la imagen sin cortarla. */
+    /* 'contain' muestra el gif entero dentro del círculo */
     object-fit: contain; 
-    
-    /* Asegura que se comporte como bloque */
     display: block;
-    
-    /* REVISA: ¡Asegúrate de que NO haya ninguna línea aquí que diga 'transform: scale(...)'! */
 }
 
 .xbox-content {
-    display: flex; flex-direction: column;
-    justify-content: center; text-align: left;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    text-align: left;
 }
+
 .xbox-title { font-size: 0.8rem; opacity: 0.9; }
 .xbox-text { font-size: 0.95rem; font-weight: bold; }
 
-/* Animación de entrada */
-.xbox-achievement.show { top: 20px; animation: popIn 0.5s; }
-@keyframes popIn { 0% { transform: translateX(-50%) scale(0.8); } 100% { transform: translateX(-50%) scale(1); } }
+/* Animación al bajar */
+.xbox-achievement.show { 
+    top: 20px; 
+    animation: popIn 0.5s; 
+}
+
+@keyframes popIn { 
+    0% { transform: translateX(-50%) scale(0.8); } 
+    100% { transform: translateX(-50%) scale(1); } 
+}
 
 
-/* --- JUEGO --- */
+/* --- 2. JUEGO --- */
 .game-container { 
     width: 90%; 
     max-width: 450px; 
@@ -105,76 +107,56 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     position: relative; 
     width: 100%; 
     height: 120px;
-    margin-top: 60px; /* Espacio para que no choque con el título */
+    margin-top: 60px; 
     margin-bottom: 20px; 
-    display: flex; align-items: center; justify-content: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
 }
 
-/* --- MONKY META (CORREGIDO: ABAJO Y AL FRENTE) --- */
+/* --- 3. POSICIONES DE LOS MONKYS (Tus ajustes) --- */
+
+/* Meta Individual */
 .goal { 
     position: absolute; 
-    right: 0; 
+    right: -10px; 
     
-    /* BAJAMOS A LA MONKY para que pise la línea */
+    /* AJUSTE TUYO: Bajamos a 0 para que no vuele */
     top: 0px; 
     
-    /* CAPA SUPERIOR: Ahora estará ENCIMA de la línea blanca */
-    z-index: 3; 
-    
+    z-index: 1; 
     transition: opacity 0.3s; 
 }
-.goal-img { 
-    width: 80px; 
-    height: auto; 
-    filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1)); 
-}
+.goal-img { width: 80px; height: auto; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1)); }
 
-/* --- ABRAZO FINAL (CORREGIDO) --- */
+/* Abrazo Final */
 .hug-sticker {
     position: absolute; 
     right: -10px; 
     
-    /* BAJAMOS EL ABRAZO TAMBIÉN */
+    /* AJUSTE TUYO: -30px para centrarlo bien */
     top: -30px; 
     
     z-index: 10;
-    opacity: 0; transform: scale(0.5);
+    opacity: 0; 
+    transform: scale(0.5);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
 }
-.hug-img { 
-    width: 140px; 
-    height: auto; 
-    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); 
-}
+.hug-img { width: 150px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
 
 .hug-sticker.show { opacity: 1; transform: scale(1); }
 .opacity-0 { opacity: 0; }
 
-.km-counter { 
-    position: absolute; 
-    bottom: -25px; 
-    width: 100%; 
-    font-weight: bold; 
-    color: #880e4f; 
-    opacity: 0.7; 
-}
+.km-counter { position: absolute; bottom: -25px; width: 100%; font-weight: bold; color: #880e4f; opacity: 0.7; }
 
-/* --- SLIDER (LÍNEA BLANCA) --- */
+/* Slider */
 .slider {
-    -webkit-appearance: none; 
-    width: 100%; 
-    height: 15px;
-    background: #fff; 
-    border-radius: 10px; 
-    outline: none;
+    -webkit-appearance: none; width: 100%; height: 15px;
+    background: #fff; border-radius: 10px; outline: none;
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-    position: relative; 
-    
-    /* CAPA MEDIA: Detrás del monky meta (3), pero delante del fondo */
-    z-index: 2; 
+    position: relative; z-index: 2;
 }
-
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
     width: 85px; height: 85px; background: transparent; border: none; cursor: grab;
@@ -185,7 +167,7 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
 .slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.1) translateY(-5px); }
 .slider.hide-thumb::-webkit-slider-thumb { opacity: 0; transform: scale(0); }
 
-/* --- CARTA --- */
+/* Carta */
 .letter-box {
     background: white; padding: 25px; border-radius: 20px;
     box-shadow: 0 10px 40px rgba(136, 14, 79, 0.2);
