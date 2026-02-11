@@ -1,29 +1,25 @@
-// Variable de control
 let hasWon = false;
-
 const slider = document.getElementById('loveSlider');
 
-// --- 1. DIFICULTAD (Si suelta, regresa) ---
+// --- DIFICULTAD (Regresa si sueltas) ---
 slider.addEventListener('touchend', slideBack);
 slider.addEventListener('mouseup', slideBack);
 
 function slideBack() {
-    if (hasWon) return; // Si ganó, no hace nada
+    if (hasWon) return;
 
     let currentValue = parseInt(slider.value);
 
-    // Si suelta antes del 99%
+    // Si no ha llegado al 99%, retrocede
     if (currentValue < 99) {
         let interval = setInterval(() => {
             if (hasWon) {
                 clearInterval(interval);
                 return;
             }
-            // Retrocede
             slider.value = parseInt(slider.value) - 2; 
             updateKmText(slider.value);
 
-            // Si llega a 0, para
             if (slider.value <= 0) {
                 clearInterval(interval);
             }
@@ -41,7 +37,7 @@ function updateKmText(val) {
     }
 }
 
-// --- 2. LÓGICA PRINCIPAL ---
+// --- LÓGICA PRINCIPAL ---
 function checkHug() {
     if (hasWon) {
         slider.value = 100;
@@ -60,15 +56,15 @@ function checkHug() {
 
     // --- VICTORIA ---
     if (value >= 99) {
-        hasWon = true; // Bloquea para que solo pase una vez
+        hasWon = true; 
         
         kmText.innerText = "¡Juntas! ❤️";
         
         goalMonky.classList.add('opacity-0');
-        slider.classList.add('hide-thumb');
-        hugSticker.classList.add('show');
+        slider.classList.add('hide-thumb'); // Oculta el viajero
+        hugSticker.classList.add('show');   // Muestra el abrazo
         
-        // Muestra el logro (SOLO UNA VEZ)
+        // Muestra el logro
         achievement.classList.add('show');
         setTimeout(() => {
             achievement.classList.remove('show');
