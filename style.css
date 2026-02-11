@@ -13,28 +13,14 @@ body {
     overflow-y: auto; 
 }
 
-/* --- LOGRO XBOX (LIMPIO, SIN BORDES NI SOMBRAS) --- */
+/* --- LOGRO XBOX (LIMPIO + GIF) --- */
 .xbox-achievement {
     position: fixed;
-    top: -100px; /* Escondido arriba */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    
-    /* Fondo oscuro plano */
-    background-color: #1f1f1f; 
-    color: white;
-    width: 320px;
-    height: 60px;
-    border-radius: 30px; 
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    
-    /* Cero bordes, cero sombras externas */
-    box-shadow: none; 
-    border: none;
-    
+    top: -100px; left: 50%; transform: translateX(-50%); z-index: 9999;
+    background-color: #1f1f1f; color: white;
+    width: 320px; height: 60px; border-radius: 30px; 
+    display: flex; align-items: center; padding: 5px;
+    box-shadow: none; border: none; /* Cero bordes raros */
     transition: top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
 }
@@ -44,65 +30,44 @@ body {
     background-color: #107c10;
     border-radius: 50%;
     display: flex; justify-content: center; align-items: center;
-    font-size: 25px;
+    overflow: hidden; /* Corta el GIF en forma de círculo */
     margin-right: 15px; margin-left: 5px;
     box-shadow: none; 
 }
 
-.xbox-content {
-    display: flex; flex-direction: column;
-    justify-content: center; text-align: left;
-}
+.gif-icon { width: 100%; height: 100%; object-fit: cover; }
+
+.xbox-content { display: flex; flex-direction: column; justify-content: center; text-align: left; }
 .xbox-title { font-size: 0.8rem; opacity: 0.9; }
 .xbox-text { font-size: 0.95rem; font-weight: bold; }
-
 .xbox-achievement.show { top: 20px; animation: popIn 0.5s; }
 @keyframes popIn { 0% { transform: translateX(-50%) scale(0.8); } 100% { transform: translateX(-50%) scale(1); } }
 
-
 /* --- JUEGO --- */
 .game-container { width: 90%; max-width: 450px; padding: 20px 0; }
-
 h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
 .subtitle { color: #ad1457; margin-bottom: 10px; font-size: 1.1rem; font-weight: bold; }
 
-/* --- PISTA (TRACK) --- */
 .track-container {
-    position: relative; 
-    width: 100%; 
-    height: 120px;
-    margin-top: 60px; /* Espacio para que no tapen el título */
-    margin-bottom: 20px; 
+    position: relative; width: 100%; height: 120px;
+    margin-top: 60px; margin-bottom: 20px; 
     display: flex; align-items: center; justify-content: center;
 }
 
-/* --- MONKYS (ALINEACIÓN CORREGIDA) --- */
-
-/* 1. Monky Meta (Individual) */
+/* --- MONKYS ALINEADOS --- */
 .goal { 
-    position: absolute; 
-    /* MISMAS COORDENADAS QUE EL ABRAZO */
-    right: -10px; 
-    top: -60px; 
-    z-index: 1; 
-    transition: opacity 0.3s; 
+    position: absolute; right: -10px; top: -60px; 
+    z-index: 1; transition: opacity 0.3s; 
 }
 .goal-img { width: 80px; height: auto; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1)); }
 
-/* 2. Monkys Abrazados */
 .hug-sticker {
-    position: absolute; 
-    /* MISMAS COORDENADAS QUE LA META */
-    right: -10px; 
-    top: -60px; 
-    z-index: 10;
-    opacity: 0; transform: scale(0.5);
+    position: absolute; right: -10px; top: -60px; 
+    z-index: 10; opacity: 0; transform: scale(0.5);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
 }
-/* Hacemos la imagen del abrazo un pelín más grande para que impacte */
-.hug-img { width: 140px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
-
+.hug-img { width: 150px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
 .hug-sticker.show { opacity: 1; transform: scale(1); }
 .opacity-0 { opacity: 0; }
 
@@ -115,7 +80,6 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
     position: relative; z-index: 2;
 }
-
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
     width: 85px; height: 85px; background: transparent; border: none; cursor: grab;
@@ -136,7 +100,6 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     max-height: 50vh; overflow-y: auto;
 }
 .letter-box.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
-
 h2 { color: var(--accent); margin-top: 0; }
 p { color: #555; line-height: 1.6; font-size: 1.1rem; }
 .heart-icon { font-size: 2rem; margin-top: 10px; animation: pulse 1s infinite; }
