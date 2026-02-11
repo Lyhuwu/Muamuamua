@@ -17,16 +17,14 @@ body {
     overflow-y: auto; 
 }
 
-/* --- 1. LOGRO XBOX (Corrección: Oculto arriba) --- */
+/* --- 1. LOGRO XBOX --- */
 .xbox-achievement {
     position: fixed;
-    /* Empieza bien arriba para que NO se vea la barra negra al inicio */
-    top: -150px; 
+    top: -150px; /* Oculto arriba */
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
     
-    /* Diseño limpio */
     background-color: #1f1f1f; 
     color: white;
     width: 320px;
@@ -36,20 +34,15 @@ body {
     display: flex;
     align-items: center;
     padding: 5px;
-    
-    /* Sin sombras ni bordes */
-    box-shadow: none; 
-    border: none;
-    
+    box-shadow: none; border: none;
     transition: top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
 }
 
-/* Círculo verde */
 .xbox-icon {
     width: 50px; 
     height: 50px;
-    background-color: #107c10; 
+    background-color: #107c10; /* Verde Xbox */
     border-radius: 50%;
     
     display: flex; 
@@ -62,31 +55,22 @@ body {
     flex-shrink: 0;
 }
 
-/* GIF sin zoom */
 .gif-icon {
     width: 100%;
     height: 100%;
-    /* 'contain' muestra el gif entero dentro del círculo */
+    /* Esto asegura que se vea todo el contenido dentro del círculo */
     object-fit: contain; 
     display: block;
 }
 
 .xbox-content {
-    display: flex; 
-    flex-direction: column;
-    justify-content: center; 
-    text-align: left;
+    display: flex; flex-direction: column;
+    justify-content: center; text-align: left;
 }
-
 .xbox-title { font-size: 0.8rem; opacity: 0.9; }
 .xbox-text { font-size: 0.95rem; font-weight: bold; }
 
-/* Animación al bajar */
-.xbox-achievement.show { 
-    top: 20px; 
-    animation: popIn 0.5s; 
-}
-
+.xbox-achievement.show { top: 20px; animation: popIn 0.5s; }
 @keyframes popIn { 
     0% { transform: translateX(-50%) scale(0.8); } 
     100% { transform: translateX(-50%) scale(1); } 
@@ -95,9 +79,7 @@ body {
 
 /* --- 2. JUEGO --- */
 .game-container { 
-    width: 90%; 
-    max-width: 450px; 
-    padding: 20px 0; 
+    width: 90%; max-width: 450px; padding: 20px 0; 
 }
 
 h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
@@ -109,22 +91,22 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     height: 120px;
     margin-top: 60px; 
     margin-bottom: 20px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
 }
 
-/* --- 3. POSICIONES DE LOS MONKYS (Tus ajustes) --- */
+/* --- 3. MONKYS Y SLIDER (Corregido) --- */
 
 /* Meta Individual */
 .goal { 
     position: absolute; 
     right: -10px; 
     
-    /* AJUSTE TUYO: Bajamos a 0 para que no vuele */
+    /* TU PEDIDO: Top en 0 */
     top: 0px; 
     
-    z-index: 1; 
+    /* TU PEDIDO: Encima de la línea (z-index alto) */
+    z-index: 10; 
+    
     transition: opacity 0.3s; 
 }
 .goal-img { width: 80px; height: auto; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1)); }
@@ -133,11 +115,9 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
 .hug-sticker {
     position: absolute; 
     right: -10px; 
-    
-    /* AJUSTE TUYO: -30px para centrarlo bien */
     top: -30px; 
     
-    z-index: 10;
+    z-index: 20; /* Siempre el más alto */
     opacity: 0; 
     transform: scale(0.5);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -150,12 +130,15 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
 
 .km-counter { position: absolute; bottom: -25px; width: 100%; font-weight: bold; color: #880e4f; opacity: 0.7; }
 
-/* Slider */
+/* SLIDER (La línea blanca) */
 .slider {
     -webkit-appearance: none; width: 100%; height: 15px;
     background: #fff; border-radius: 10px; outline: none;
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-    position: relative; z-index: 2;
+    position: relative; 
+    
+    /* IMPORTANTE: z-index menor que el monky (que tiene 10) */
+    z-index: 1; 
 }
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
