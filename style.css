@@ -10,105 +10,101 @@ body {
     background-color: var(--bg-color);
     font-family: 'Fredoka', sans-serif;
     text-align: center;
-    overflow-y: auto; /* Permite scroll si la pantalla es chica */
+    overflow-y: auto; 
 }
 
-/* --- ESTILO DEL LOGRO XBOX (CORREGIDO DEFINITIVO) --- */
-.achievement-banner {
+/* --- LOGRO XBOX (LIMPIO Y PLANO) --- */
+.xbox-achievement {
     position: fixed;
-    top: 0;
+    top: -100px;
     left: 50%;
-    /* AQUÍ ESTÁ EL TRUCO: */
-    /* Lo movemos hacia arriba el 120% de su altura (fuera de pantalla) y lo centramos horizontalmente */
-    transform: translate(-50%, -120%);
-    width: 300px;
-    z-index: 9999; /* Siempre encima de todo */
-    /* Usamos 'transform' para la transición, es más suave en celulares */
-    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.3s ease;
-    pointer-events: none; /* Para que no estorbe al touch */
-
-    /* SEGURO EXTRA: Totalmente invisible mientras está arriba */
-    opacity: 0;
-}
-
-.achievement-banner img {
-    width: 100%;
-    border-radius: 50px; /* Redondeado estilo notificación */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Sombra bonita */
-    display: block;
-    /* Un pequeño borde blanco para que resalte más */
-    border: 3px solid white;
-}
-
-/* Clase para que baje (aparezca) */
-.achievement-banner.show {
-    /* Lo bajamos a 20px del borde superior */
-    transform: translate(-50%, 20px);
-    /* Lo hacemos visible */
-    opacity: 1;
-}
-}
-
-.achievement-banner img {
-    width: 100%;
-    border-radius: 50px; /* Redondeado estilo notificación */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Sombra bonita */
-    display: block;
-}
-
-/* Clase para que baje */
-.achievement-banner.show {
-    top: 20px;
-}
-
-/* --- ESTILO DEL LOGRO XBOX (LIMPIO SIN BORDES) --- */
-.achievement-banner {
-    position: fixed;
-    top: 20px; /* Posición final deseada */
-    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
     
-    /* Lo ocultamos moviéndolo hacia arriba y haciéndolo transparente */
-    transform: translate(-50%, -200%); 
-    opacity: 0;
+    /* Fondo oscuro plano sin sombras raras */
+    background-color: #1f1f1f; 
+    color: white;
+    width: 320px;
+    height: 60px;
+    border-radius: 30px; 
+    display: flex;
+    align-items: center;
+    padding: 5px;
     
-    width: 300px; /* Ajusta el tamaño si lo quieres más grande o chico */
-    z-index: 9999; 
-    pointer-events: none; /* Para que no estorbe */
-    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-.achievement-banner img {
-    width: 100%;
-    display: block;
+    /* Eliminamos sombras y bordes para quitar la "profundidad" rara */
+    box-shadow: none; 
+    border: none;
     
-    /* --- AQUÍ ESTABA EL PROBLEMA --- */
-    /* Hemos quitado border, border-radius y box-shadow */
-    /* Ahora solo se verá tu GIF, sin recuadros ni sombras raras */
+    transition: top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
 }
 
-/* Clase para mostrarlo */
-.achievement-banner.show {
-    transform: translate(-50%, 0); /* Baja a su posición original */
-    opacity: 1; /* Se hace visible */
+.xbox-icon {
+    width: 50px; height: 50px;
+    background-color: #107c10;
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 25px;
+    margin-right: 15px; margin-left: 5px;
+    /* Sin sombra en el icono tampoco */
+    box-shadow: none; 
 }
 
-.goal { position: absolute; right: 0; top: -20px; z-index: 1; transition: opacity 0.3s; }
-.goal-img { width: 80px; height: auto; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.2)); }
+.xbox-content {
+    display: flex; flex-direction: column;
+    justify-content: center; text-align: left;
+}
+.xbox-title { font-size: 0.8rem; opacity: 0.9; }
+.xbox-text { font-size: 0.95rem; font-weight: bold; }
 
-/* Sticker de Abrazo */
+.xbox-achievement.show { top: 20px; animation: popIn 0.5s; }
+@keyframes popIn { 0% { transform: translateX(-50%) scale(0.8); } 100% { transform: translateX(-50%) scale(1); } }
+
+
+/* --- JUEGO --- */
+.game-container { width: 90%; max-width: 450px; padding: 20px 0; }
+
+h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
+.subtitle { color: #ad1457; margin-bottom: 10px; font-size: 1.1rem; font-weight: bold; }
+
+/* --- CONTENEDOR DE LA PISTA (TRACK) --- */
+.track-container {
+    position: relative; 
+    width: 100%; 
+    height: 120px;
+    /* AUMENTÉ ESTO: Da espacio para que los monos no tapen el título */
+    margin-top: 60px; 
+    margin-bottom: 20px; 
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* --- MONKYS --- */
+.goal { 
+    position: absolute; 
+    right: 0; 
+    /* Ajuste de altura para que no floten tanto */
+    top: -55px; 
+    z-index: 1; 
+    transition: opacity 0.3s; 
+}
+.goal-img { width: 80px; height: auto; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1)); }
+
 .hug-sticker {
-    position: absolute; right: 0; top: -30px; z-index: 10;
+    position: absolute; 
+    right: -10px; /* Un poco a la derecha para centrar el abrazo */
+    top: -65px; /* Altura ajustada */
+    z-index: 10;
     opacity: 0; transform: scale(0.5);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
 }
-.hug-img { width: 130px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); }
+.hug-img { width: 140px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
 .hug-sticker.show { opacity: 1; transform: scale(1); }
 .opacity-0 { opacity: 0; }
 
 .km-counter { position: absolute; bottom: -25px; width: 100%; font-weight: bold; color: #880e4f; opacity: 0.7; }
 
-/* Slider */
+/* --- SLIDER --- */
 .slider {
     -webkit-appearance: none; width: 100%; height: 15px;
     background: #fff; border-radius: 10px; outline: none;
@@ -126,7 +122,7 @@ body {
 .slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.1) translateY(-5px); }
 .slider.hide-thumb::-webkit-slider-thumb { opacity: 0; transform: scale(0); }
 
-/* Carta */
+/* --- CARTA --- */
 .letter-box {
     background: white; padding: 25px; border-radius: 20px;
     box-shadow: 0 10px 40px rgba(136, 14, 79, 0.2);
