@@ -5,27 +5,30 @@ let hasWon = false;
 const slider = document.getElementById('loveSlider');
 
 // --- 1. DIFICULTAD (Si suelta, regresa) ---
+// Escuchamos tanto toque de celular como mouse de PC
 slider.addEventListener('touchend', slideBack);
 slider.addEventListener('mouseup', slideBack);
 
 function slideBack() {
-    // Si ya ganó, NO hacemos nada (se queda quieto)
+    // Si ya ganó, no hacemos nada
     if (hasWon) return;
 
     let currentValue = parseInt(slider.value);
 
-    // Si no ha llegado al 99%, retrocede
+    // Si suelta antes del 99%, retrocede
     if (currentValue < 99) {
         let interval = setInterval(() => {
-            // Si ya ganó durante el retroceso (raro pero posible), paramos
+            // Si gana durante el proceso, paramos
             if (hasWon) {
                 clearInterval(interval);
                 return;
             }
 
-            slider.value = parseInt(slider.value) - 2; // Velocidad de retroceso
-            updateKmText(slider.value); // Actualizar texto visual
+            // Velocidad de retroceso
+            slider.value = parseInt(slider.value) - 2; 
+            updateKmText(slider.value);
 
+            // Si llega al inicio, paramos
             if (slider.value <= 0) {
                 clearInterval(interval);
             }
@@ -33,13 +36,11 @@ function slideBack() {
     }
 }
 
-// Auxiliar para texto
 function updateKmText(val) {
     const kmText = document.getElementById('kmText');
     let maxKm = 3000;
     let currentKm = Math.round(maxKm - (maxKm * (val / 100)));
     
-    // Solo mostramos km si no ha ganado
     if (!hasWon) {
         kmText.innerText = currentKm + " km restantes";
     }
@@ -47,6 +48,12 @@ function updateKmText(val) {
 
 // --- 2. LÓGICA PRINCIPAL ---
 function checkHug() {
+    // Si ya ganó, forzamos el slider al final y no hacemos nada más
+    if (hasWon) {
+        slider.value = 100;
+        return; 
+    }
+
     const value = parseInt(slider.value);
     const letter = document.getElementById('hidden-letter');
     const goalMonky = document.getElementById('goalMonky');
@@ -55,17 +62,11 @@ function checkHug() {
     const body = document.querySelector('body');
     const achievement = document.getElementById('achievement');
 
-    // Si ya ganó, aseguramos que todo se quede como victoria y salimos
-    if (hasWon) {
-        slider.value = 100; // Forzar al final
-        return; 
-    }
-
     updateKmText(value);
 
-    // --- DETECTAR VICTORIA ---
+    // --- DETECTAR VICTORIA (Al llegar al 99%) ---
     if (value >= 99) {
-        hasWon = true; // ¡CANDADO! Ya no se podrá activar de nuevo
+        hasWon = true; // ¡CANDADO ACTIVADO!
         
         kmText.innerText = "¡Juntas! ❤️";
         
@@ -76,8 +77,9 @@ function checkHug() {
         // B. Mostrar abrazo
         hugSticker.classList.add('show');
 
-        // C. LOGRO XBOX (Solo saldrá esta vez)
+        // C. LOGRO XBOX (Aparece sin bordes)
         achievement.classList.add('show');
+        
         // Opcional: Que se quite solito a los 5 segundos
         setTimeout(() => {
             achievement.classList.remove('show');
@@ -106,7 +108,7 @@ function checkHug() {
                 shapes: ['heart']
             });
             
-            // Deshabilitar slider para que no interactúe más
+            // Deshabilitar el slider
             slider.disabled = true;
         }
     }
