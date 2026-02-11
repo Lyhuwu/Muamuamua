@@ -68,7 +68,7 @@ body {
 
     /* CLAVE: 'cover' hace que la imagen llene todo el círculo.
        Al ser transparente, se verá genial sobre el fondo verde. */
-    object-fit: cover;
+    object-fit: contain;
 
     display: block;
 }
