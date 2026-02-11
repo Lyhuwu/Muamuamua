@@ -64,16 +64,18 @@ body {
     flex-shrink: 0;
 }
 
-/* Tu GIF (Imagen) */
+/* Tu GIF (Imagen) - SIN ZOOM */
 .gif-icon {
     width: 100%;
     height: 100%;
     
-    /* Esto obliga a la imagen a cubrir todo el espacio sin deformarse */
-    object-fit: cover; 
+    /* AQUÍ ESTÁ LA CLAVE: */
+    /* 'contain' asegura que se vea TODO el GIF dentro del círculo, sin cortarse. */
+    object-fit: contain;
     
-    /* TRUCO FINAL: Un pequeño zoom del 20% para eliminar cualquier borde vacío */
-    transform: scale(1.2); 
+    display: block;
+    /* Asegúrate de que NO haya ninguna línea que diga 'transform: scale(...)' aquí */
+}
 }
 
 .xbox-content {
