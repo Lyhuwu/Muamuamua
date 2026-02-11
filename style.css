@@ -1,19 +1,23 @@
 :root {
-    --bg-color: #fce4ec;
+    --bg-color: #fce4ec; /* Rosa muy suave */
     --track-color: #f8bbd0;
     --accent: #d81b60;
 }
 
 body {
-    margin: 0; padding: 0; height: 100vh;
-    display: flex; justify-content: center; align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--bg-color);
     font-family: 'Fredoka', sans-serif;
     text-align: center;
     overflow-y: auto; 
 }
 
-/* --- LOGRO XBOX (ARREGLADO) --- */
+/* --- LOGRO XBOX (CORREGIDO Y MÁS GRANDE) --- */
 .xbox-achievement {
     position: fixed;
     top: -100px; /* Oculto arriba */
@@ -23,9 +27,9 @@ body {
     
     background-color: #1f1f1f; /* Fondo oscuro */
     color: white;
-    width: 320px;
-    height: 60px;
-    border-radius: 30px; 
+    width: 330px; /* Un poquito más ancho para que quepa el GIF grande */
+    height: 65px; /* Un poco más alto */
+    border-radius: 35px; 
     display: flex;
     align-items: center;
     padding: 5px;
@@ -38,28 +42,46 @@ body {
     pointer-events: none;
 }
 
+/* El círculo verde contenedor (MÁS GRANDE) */
 .xbox-icon {
-    width: 50px; height: 50px;
-    background-color: #107c10;
+    width: 58px; /* Aumentado para que se vea bien el GIF */
+    height: 58px;
+    
+    background-color: #107c10; /* Verde Xbox */
     border-radius: 50%;
     display: flex; justify-content: center; align-items: center;
     margin-right: 15px; margin-left: 5px;
-    overflow: hidden; /* Recorta el GIF en círculo */
+    
+    /* IMPORTANTE: Recorta el GIF en círculo perfecto */
+    overflow: hidden; 
     flex-shrink: 0;
 }
 
-.xbox-icon img { width: 100%; height: 100%; object-fit: cover; }
+/* El GIF dentro del círculo (LLENA TODO) */
+.xbox-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Hace que el GIF cubra todo el círculo */
+}
 
-.xbox-content { display: flex; flex-direction: column; justify-content: center; text-align: left; }
+.xbox-content {
+    display: flex; flex-direction: column;
+    justify-content: center; text-align: left;
+}
 .xbox-title { font-size: 0.8rem; opacity: 0.9; }
 .xbox-text { font-size: 0.95rem; font-weight: bold; }
 
+/* Animación de entrada */
 .xbox-achievement.show { top: 20px; animation: popIn 0.5s; }
 @keyframes popIn { 0% { transform: translateX(-50%) scale(0.8); } 100% { transform: translateX(-50%) scale(1); } }
 
 
 /* --- JUEGO --- */
-.game-container { width: 90%; max-width: 450px; padding: 20px 0; }
+.game-container { 
+    width: 90%; 
+    max-width: 450px; 
+    padding: 20px 0; 
+}
 
 h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
 .subtitle { color: #ad1457; margin-bottom: 10px; font-size: 1.1rem; font-weight: bold; }
@@ -73,39 +95,69 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     display: flex; align-items: center; justify-content: center;
 }
 
-/* --- AQUÍ ESTÁ EL AJUSTE DE ALTURA --- */
+/* --- MONKY META (CORREGIDO: ABAJO Y AL FRENTE) --- */
 .goal { 
     position: absolute; 
     right: 0; 
-    /* BAJAMOS A LA MONKY (Antes estaba en -55px) */
-    top: -10px; 
-    z-index: 1; 
+    
+    /* BAJAMOS A LA MONKY para que pise la línea */
+    top: -5px; 
+    
+    /* CAPA SUPERIOR: Ahora estará ENCIMA de la línea blanca */
+    z-index: 3; 
+    
     transition: opacity 0.3s; 
 }
-.goal-img { width: 80px; height: auto; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1)); }
+.goal-img { 
+    width: 80px; 
+    height: auto; 
+    filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1)); 
+}
 
+/* --- ABRAZO FINAL (CORREGIDO) --- */
 .hug-sticker {
     position: absolute; 
     right: -10px; 
+    
     /* BAJAMOS EL ABRAZO TAMBIÉN */
-    top: -30px; 
+    top: -10px; 
+    
     z-index: 10;
     opacity: 0; transform: scale(0.5);
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
 }
-.hug-img { width: 140px; height: auto; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+.hug-img { 
+    width: 140px; 
+    height: auto; 
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); 
+}
+
 .hug-sticker.show { opacity: 1; transform: scale(1); }
 .opacity-0 { opacity: 0; }
 
-.km-counter { position: absolute; bottom: -25px; width: 100%; font-weight: bold; color: #880e4f; opacity: 0.7; }
+.km-counter { 
+    position: absolute; 
+    bottom: -25px; 
+    width: 100%; 
+    font-weight: bold; 
+    color: #880e4f; 
+    opacity: 0.7; 
+}
 
-/* --- SLIDER --- */
+/* --- SLIDER (LÍNEA BLANCA) --- */
 .slider {
-    -webkit-appearance: none; width: 100%; height: 15px;
-    background: #fff; border-radius: 10px; outline: none;
+    -webkit-appearance: none; 
+    width: 100%; 
+    height: 15px;
+    background: #fff; 
+    border-radius: 10px; 
+    outline: none;
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-    position: relative; z-index: 2;
+    position: relative; 
+    
+    /* CAPA MEDIA: Detrás del monky meta (3), pero delante del fondo */
+    z-index: 2; 
 }
 
 .slider::-webkit-slider-thumb {
