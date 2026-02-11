@@ -42,40 +42,41 @@ body {
     pointer-events: none;
 }
 
-/* El círculo verde (Contenedor) */
+//* 1. El círculo verde (Contenedor) */
 .xbox-icon {
-    width: 50px; 
+    width: 50px;
     height: 50px;
     background-color: #107c10; /* Color Verde Xbox */
-    border-radius: 50%;
+    border-radius: 50%; /* Forma de círculo */
     
-    /* Alineación segura */
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    
-    /* Importante: Corta lo que se salga del círculo */
+    /* IMPORTANTE: 'overflow: hidden' asegura que la imagen no se salga del círculo */
     overflow: hidden; 
     
-    margin-right: 15px; 
+    margin-right: 15px;
     margin-left: 5px;
     
-    /* Evita que se deforme */
+    /* Evita que se aplaste si el texto es largo */
     flex-shrink: 0;
+    
+    /* Quitamos propiedades extra que podrían interferir */
+    position: relative;
+    display: block; 
 }
 
-/* Tu GIF (Imagen) - SIN ZOOM */
+/* 2. Tu GIF (Imagen) */
 .gif-icon {
+    /* Ocupar exactamente el tamaño del círculo */
     width: 100%;
     height: 100%;
     
-    /* AQUÍ ESTÁ LA CLAVE: */
-    /* 'contain' asegura que se vea TODO el GIF dentro del círculo, sin cortarse. */
-    object-fit: contain;
+    /* --- LA CLAVE MAESTRA --- */
+    /* 'contain' OBLIGA a mostrar toda la imagen sin cortarla. */
+    object-fit: contain; 
     
+    /* Asegura que se comporte como bloque */
     display: block;
-    /* Asegúrate de que NO haya ninguna línea que diga 'transform: scale(...)' aquí */
-}
+    
+    /* REVISA: ¡Asegúrate de que NO haya ninguna línea aquí que diga 'transform: scale(...)'! */
 }
 
 .xbox-content {
