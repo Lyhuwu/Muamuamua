@@ -116,7 +116,7 @@ h1 { color: #880e4f; margin-bottom: 5px; font-size: 2rem; }
     right: -10px; 
     
     /* TU AJUSTE: Top en 0 */
-    top: 25px; 
+    top: 35px; 
     
     /* TU AJUSTE: Z-index 5 para estar ENCIMA de la línea (que es 1) */
     z-index: 5; 
